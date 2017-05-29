@@ -8,39 +8,18 @@ Random Forests are a versatile method for classification and regression. It is a
 
 For prediction, the trees cast a majority vote on the result.
 
-library\(randomForest\)
+    library(randomForest)
 
-
+    rf_model <- randomForest(as.factor(TargetColumn) ~ Col1 + Col2 + Col3,
 
-rf\_model &lt;- randomForest\(as.factor\(TargetColumn\) ~ Col1 + Col2 + Col3,
+                    data=training, importance=TRUE, ntree=10)
 
-                    data=training, 
+    # evaluate model
+    rf_model.results <- predict(rf_model,newdata=Xtest,type='response')
+    misClasificError <- mean(rf_model.results != ytest)
+    print(paste('Accuracy Training',1-misClasificError))
 
-                    importance=TRUE, 
-
-                    ntree=10\)
-
-
-
-\# evaluate model
-
-rf\_model.results &lt;- predict\(rf\_model,newdata=subset\(training, select=c\(2,3,4\)\),type='response'\)
-
-misClasificError &lt;- mean\(rf\_model.results != training$TargetColumn\)
-
-print\(paste\('Accuracy Training',1-misClasificError\)\)
-
-
-
-rf\_model.results &lt;- predict\(rf\_model,newdata=subset\(test, select=c\(2,3,4\)\),type='response'\)
-
-misClasificError &lt;- mean\(rf\_model.results != test$TargetColumn\)
-
-print\(paste\('Accuracy Test',1-misClasificError\)\)
-
-
-
-Prediction &lt;- predict\(rf\_model, test\)
+    Prediction <- predict(rf_model, test)
 
 ### Hints
 
@@ -50,9 +29,11 @@ Prediction &lt;- predict\(rf\_model, test\)
 
 To plot some properties of the trees, try
 
-`varImpPlot(rf_model)`
+`varImpPlot(rf_model)
+`
 
-The **gini diagram** quantifies the purity of end nodes in the tree \(i.e. whether there is consensus on the result\)
+The **gini diagram** quantifies the purity of end nodes
+ in the tree \(i.e. whether there is consensus on the result\)
 
 ### Caveats
 
