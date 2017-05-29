@@ -20,8 +20,7 @@
 
 `index <- sample(seq_len(nrow(m)), size = size)`
 
-`  
-`
+
 
 `train <- m[index, ]`
 
@@ -34,6 +33,8 @@
 `Xtest = test[,1:4]`
 
 `ytest = test[,5]`
+
+
 
 `# build k-nearest-neighbor model`
 
